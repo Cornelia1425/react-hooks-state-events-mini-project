@@ -1,11 +1,17 @@
 import React from "react";
 
-function Task() {
+function Task({ name, category, onDelete}) {
+
+  function handleDelete(e){
+    e.stopPropagation()
+    onDelete(name)
+  }
+
   return (
     <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+      <div className="label">{category}</div>
+      <div className="text">{name}</div>
+      <button className="delete" onClick={handleDelete}>X</button>
     </div>
   );
 }
