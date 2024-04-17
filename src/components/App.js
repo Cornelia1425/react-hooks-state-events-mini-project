@@ -23,10 +23,10 @@ function App() {
     
     console.log ("setSelectedCategory taking string:", selectedCategory)
 
-  if(selectedCategory === "All") {
+  if(string === "All") {
       setTasksByCategory(tasks)} 
     else { 
-      const tasksBySelectedCategory= tasks.filter( (task)=> task.category === selectedCategory)
+      const tasksBySelectedCategory= tasks.filter( (task)=> task.category === string)
       setTasksByCategory(tasksBySelectedCategory)}  
   }
   
@@ -41,11 +41,30 @@ function App() {
   }
 
 
+
+  function createTask(newTask){
+    console.log ("newTask: ", newTask)
+    setTasks([...tasks, newTask])
+    setTasksByCategory([...tasksbyCategory, newTask])
+ /*  fetch('../data',{
+    method:'POST', 
+    headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    body:JSON.stringify({inputDetail, chooseCategory}) //not sure about it here?
+  })
+  .then(res=>res.json())
+  .then(newTask =>
+    setTasks([...tasks, newTask])) */
+  }
+
+  console.log ("tasks:", tasks)
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter onCategoryChange={onCategoryChange}/>
-      <NewTaskForm />
+      <NewTaskForm createTask={createTask} />
       <TaskList tasks={tasksbyCategory} onDelete={onDelete} />
     </div>
   );
